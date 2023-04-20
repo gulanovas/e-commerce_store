@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'category',
+    'tinymce',
     'store',
-    'cart'
+    'cart',
 ]
 
 MIDDLEWARE = [
