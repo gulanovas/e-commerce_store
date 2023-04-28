@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-k6zw+ruv_7aq(glxzn9bcl0kx4b9ha8ek$b&rgjyycxybuh_qn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-env.eba-9qscyrmg.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['testo-env.eba-pkp5udnk.us-west-2.elasticbeanstalk.com']
 # Application definition
 
 INSTALLED_APPS = [
@@ -80,6 +80,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
