@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-
 from cart.models import Cart, CartItem
 from .models import Product, ProductGallery
 from category.models import Category
 from cart.views import _cart_id
-from django.db.models import Q
+from django.db.models import Q, Max, Min
 
 # Create your views here.
 
@@ -68,3 +67,23 @@ def search(request):
     return render(request, 'store/store.html', context)
 
     
+# def price_filter(request):
+#     min_price = Product.objects.all().aggregate(Min('price'))
+#     max_price = Product.objects.all().aggregate(Max('price'))
+#     print(min_price)
+#     print(max_price)
+
+#     FilterPrice = request.GET.get('FilterPrice')
+#     if FilterPrice:
+#         Int_FilterPrice = int(FilterPrice)
+#         product = Product.objects.filter(price__lte = Int_FilterPrice)
+#     else:
+#         product = Product.objects.all()
+        
+#     context  = {
+#         'min_price':min_price,
+#         'max_price':max_price,
+# 		'FilterPrice':FilterPrice,
+#     }	
+    
+#     return render(request, 'store/store.html', context)

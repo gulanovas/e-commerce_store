@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-k6zw+ruv_7aq(glxzn9bcl0kx4b9ha8ek$b&rgjyycxybuh_qn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['testo-env.eba-pkp5udnk.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['elpaspirtukai.lt', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'accounts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'greatkart.urls'
@@ -82,22 +84,23 @@ AUTH_USER_MODEL = 'accounts.Account'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'gabrielius',
+#         'USER': 'gabrielius',
+#         'PASSWORD': 'dJWFNrhp2tHeTwGi',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'OPTIONS': {'charset': 'utf8mb4'},
+#     }
+# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
@@ -145,6 +148,10 @@ STATICFILES_DIRS = [
 # media files configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
+
+
+CSRF_TRUSTED_ORIGINS = ["https://elpaspirtukai.lt"]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
